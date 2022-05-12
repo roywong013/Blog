@@ -1,0 +1,11 @@
+import "./Banner.css";
+const Banner = () => {
+  return (
+    <div className="banner">
+      <h1>My blog</h1>
+      <h3>A place to share your knowledge.</h3>
+    </div>
+  );
+};
+
+export default Banner;

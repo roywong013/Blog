@@ -1,9 +1,10 @@
-import "./Banner.css";
 const Banner = () => {
   return (
-    <div className="banner">
-      <h1 className="my-blog">My blog</h1>
-      <h3 className="my-blog-text">A place to share your knowledge.</h3>
+    <div className="banner ">
+      <div className="container">
+        <h1 className="logo-font">My Blog</h1>
+        <p>A place to share your knowledge.</p>
+      </div>
     </div>
   );
 };

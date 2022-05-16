@@ -12,9 +12,9 @@ const Header = () => {
         <ul className="nav navbar-nav pull-xs-right">
           <NavLink text="Home" route="/" />
           <NavLink text="New Article" route="/editor" />
-          <NavLink text="Settings" route="/" />
-          <NavLink text="Sign in" route="/" />
-          <NavLink text="Sign up" route="/" />
+          <NavLink text="Settings" route="/settings" />
+          <NavLink text="Sign in" route="/login" />
+          <NavLink text="Sign up" route="/register" />
         </ul>
       </div>
     </nav>

@@ -12,7 +12,7 @@ const ArticlePreview = () => {
           <span className="date">January 20th</span>
         </div>
         <button className="btn btn-outline-primary btn-sm pull-xs-right">
-          <i class="ion-heart"></i> 29
+          <i className="ion-heart"></i> 29
         </button>
       </div>
       <a href="/#/" className="preview-link">

@@ -1,5 +1,5 @@
-const BuildFormField = () => {
-  return 123;
+const BuildFormField = (props) => {
+  return <fieldset className="form-group">{props.children}</fieldset>;
 };
 
 export default BuildFormField;

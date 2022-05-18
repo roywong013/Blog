@@ -15,6 +15,7 @@ const Header = () => {
           <NavLink text="Settings" route="/settings" />
           <NavLink text="Sign in" route="/login" />
           <NavLink text="Sign up" route="/register" />
+          <NavLink text="Profile" route="/profile" />
         </ul>
       </div>
     </nav>

@@ -1,5 +1,5 @@
 import "./styles.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./Component/Page/HomePage/HomePage";
 import EditorPage from "./Component/Page/EditorPage";
 import Settings from "./Component/Page/Settings";
@@ -13,9 +13,10 @@ export default function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/editor" element={<EditorPage />} />
       <Route path="/settings" element={<Settings />} />
-      <Route exact path="/login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

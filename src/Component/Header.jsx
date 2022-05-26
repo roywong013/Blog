@@ -1,7 +1,20 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { loginActions } from "../store/slice/login";
 import NavLink from "./NavLink";
 
 const Header = () => {
+  const isLogin = useSelector((state) => state.login.isLogin);
+  const dispatch = useDispatch();
+
+  const loginHandler = () => {
+    if (!isLogin) {
+      dispatch(loginActions.login());
+    } else {
+      dispatch(loginActions.logout());
+    }
+  };
+
   return (
     <nav className="navbar navbar-light">
       <div className="container">
@@ -11,11 +24,12 @@ const Header = () => {
 
         <ul className="nav navbar-nav pull-xs-right">
           <NavLink text="Home" route="/" />
-          <NavLink text="New Article" route="/editor" />
-          <NavLink text="Settings" route="/settings" />
-          <NavLink text="Sign in" route="/login" />
-          <NavLink text="Sign up" route="/register" />
-          <NavLink text="Profile" route="/profile" />
+          {isLogin && <NavLink text="New Article" route="/editor" />}
+          {isLogin && <NavLink text="Settings" route="/settings" />}
+          {!isLogin && <NavLink text="Sign in" route="/login" />}
+          {!isLogin && <NavLink text="Sign up" route="/register" />}
+          {isLogin && <NavLink text="Profile" route="/profile" />}
+          <button onClick={loginHandler}>Log</button>
         </ul>
       </div>
     </nav>

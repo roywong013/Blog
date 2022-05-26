@@ -1,11 +1,12 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit"
+import login from "./slice/login"
 
-let defaultState = {};
 
-const reducer = (state = defaultState, action) => {
-  return state;
-};
 
-const store = createStore(reducer);
+const store = configureStore({
+  reducer: {
+    login
+  }
+});
 
 export default store;

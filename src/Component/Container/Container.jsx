@@ -1,5 +1,5 @@
 import FeedToggle from "./FeedToggle";
-import ArticlePreview from "./ArticlePreview";
+import ArticlesViewer from "../ArticlesViewer/ArticlesViewer";
 import SideBar from "./SideBar";
 
 const Container = () => {
@@ -9,8 +9,7 @@ const Container = () => {
         <div className="col-md-9">
           <FeedToggle />
           {/*List out Article Preview by .map() */}
-          <ArticlePreview />
-          <ArticlePreview />
+          <ArticlesViewer />
         </div>
 
         <div className="col-md-3">

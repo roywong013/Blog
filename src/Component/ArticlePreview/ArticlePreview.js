@@ -1,15 +1,17 @@
+import { Link } from "react-router-dom";
+
 const ArticlePreview = (props) => {
   return (
     <div className="article-preview">
       <div className="article-meta">
-        <a href="profile.html">
-          <img src="http://i.imgur.com/Qr71crq.jpg" alt="1" />
-        </a>
+        <Link to={`/@${props.author.username}`}>
+          <img src={props.author.image} alt="1" />
+        </Link>
         <div className="info">
-          <a href="/#/" className="author">
-            Eric Simons
-          </a>
-          <span className="date">January 20th</span>
+          <Link to={`/@${props.author.username}`} className="author">
+            {props.author.username}
+          </Link>
+          <span className="date">{props.date}</span>
         </div>
         <button className="btn btn-outline-primary btn-sm pull-xs-right">
           <i className="ion-heart"></i> 29

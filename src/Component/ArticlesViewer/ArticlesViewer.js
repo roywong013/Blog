@@ -22,7 +22,7 @@ const ArticlesViewer = () => {
 
       const loadedArticles = [];
       for (const key in data) {
-        loadedArticles.push({
+        loadedArticles.unshift({
           id: key,
           title: data[key].title,
           description: data[key].description,
@@ -43,7 +43,7 @@ const ArticlesViewer = () => {
   }, [fetchArticlesHandler]);
 
   //Consider to use for-loop for better run-time
-  const MapArticlePreview = articles.slice(0).reverse().map((article) => (
+  const MapArticlePreview = articles.map((article) => (
     <ArticlePreview
       title={article.title}
       description={article.description}

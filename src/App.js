@@ -4,7 +4,7 @@ import HomePage from "./Component/Page/HomePage/HomePage";
 import EditorPage from "./Component/Page/EditorPage/EditorPage";
 import Settings from "./Component/Page/Settings";
 import Login from "./Component/Page/LoginPage/Login";
-import Register from "./Component/Page/Register";
+import Register from "./Component/Page/RegisterPage/Register";
 import Profile from "./Component/Page/ProfilePage/Profile";
 
 export default function App() {

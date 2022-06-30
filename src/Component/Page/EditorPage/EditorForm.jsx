@@ -52,7 +52,7 @@ const EditorForm = (props) => {
         <p className="alert alert-warning">Please enter a valid description</p>
       )}
       {!isBodyValid && isSubmitTouched && (
-        <p className="alert alert-warning">Please enter a valid body content</p>
+        <p className="alert alert-warning">Please enter a valid body</p>
       )}
       {}
       <form onSubmit={submitHandler}>

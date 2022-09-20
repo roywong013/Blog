@@ -16,26 +16,25 @@ const Register = () => {
     const enteredName = nameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-
-    fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCJCKIdycLShALo-FLNEXGDNabCzTOVfyc",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-          returnSecureToken: true
-        }),
-        headers: {
-          "Content-Type": "application/json"
-        }
+    let url =
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCE-lBPmgWMTGc_tN0g7fMxBJzDCTF-AC0";
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        returnSecureToken: true
+      }),
+      headers: {
+        "Content-Type": "application/json"
       }
-    )
+    })
       .then((res) => {
         setIsLoading(false);
         if (res.ok) {
           // ... success respone
           console.log("RES OK");
+          return res.json;
         } else {
           // ...error
           return res.json().then((data) => {
@@ -44,12 +43,13 @@ const Register = () => {
             if (data && data.error && data.error.message) {
               errorMessage = data.error.message;
             }
-            alert(errorMessage);
+
+            throw new Error(errorMessage);
           });
         }
       })
-      .catch(() => {
-        console.log("ABC");
+      .catch((err) => {
+        alert(err.message);
       });
   };
   return (

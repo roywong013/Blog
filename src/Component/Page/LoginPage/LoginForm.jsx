@@ -1,10 +1,53 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { loginActions } from "../../../store/slice/login";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
 
-  const loginHandler = () => {
-    dispatch({ type: "LOGIN" });
+  const loginHandler = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    const enteredEmail = emailInputRef.current.value;
+    const enteredPassword = passwordInputRef.current.value;
+    let url =
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCE-lBPmgWMTGc_tN0g7fMxBJzDCTF-AC0";
+
+    const sendData = async () => {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const data = await response.json();
+      console.log(data);
+
+      setIsLoading(false);
+      if (response.ok) {
+        dispatch(loginActions.login());
+        return data;
+      } else {
+        let errorMessage = "Authentication failed";
+        if (data && data.error && data.error.message) {
+          errorMessage = data.error.message;
+        }
+        throw new Error(errorMessage);
+      }
+    };
+    sendData()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => alert(err.message));
   };
   return (
     <form>
@@ -13,22 +56,27 @@ const LoginForm = () => {
           className="form-control form-control-lg"
           type="email"
           placeholder="Email"
+          ref={emailInputRef}
         />
       </fieldset>
       <fieldset className="form-group">
         <input
           className="form-control form-control-lg"
-          type="text"
+          type="password"
           placeholder="Password"
+          ref={passwordInputRef}
         />
       </fieldset>
 
-      <button
-        onClick={loginHandler}
-        className="btn btn-lg btn-primary pull-xs-right"
-      >
-        Sign in
-      </button>
+      {!isLoading && (
+        <button
+          onClick={loginHandler}
+          className="btn btn-lg btn-primary pull-xs-right"
+        >
+          Sign in
+        </button>
+      )}
+      {isLoading && <p>Loading...</p>}
     </form>
   );
 };

@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginActions } from "../../../store/slice/login";
 
 const LoginForm = () => {
+  const idToken = useSelector((state) => state.login.idToken);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
@@ -29,11 +30,8 @@ const LoginForm = () => {
         }
       });
       const data = await response.json();
-      console.log(data);
-
       setIsLoading(false);
       if (response.ok) {
-        dispatch(loginActions.login());
         return data;
       } else {
         let errorMessage = "Authentication failed";
@@ -45,7 +43,7 @@ const LoginForm = () => {
     };
     sendData()
       .then((data) => {
-        console.log(data);
+        dispatch(loginActions.login(data.idToken));
       })
       .catch((err) => alert(err.message));
   };

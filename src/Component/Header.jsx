@@ -7,12 +7,8 @@ const Header = () => {
   const isLogin = useSelector((state) => state.login.isLogin);
   const dispatch = useDispatch();
 
-  const loginHandler = () => {
-    if (!isLogin) {
-      dispatch(loginActions.login());
-    } else {
+  const logoutHandler = () => {
       dispatch(loginActions.logout());
-    }
   };
 
   return (
@@ -29,7 +25,9 @@ const Header = () => {
           {!isLogin && <NavLink text="Sign in" route="/login" />}
           {!isLogin && <NavLink text="Sign up" route="/register" />}
           {isLogin && <NavLink text="Profile" route="/profile" />}
-          <button onClick={loginHandler}>Log</button>
+          {isLogin && <li className="nav-item">
+            <button onClick={logoutHandler} className="nav-link">Log out</button>
+          </li>}
         </ul>
       </div>
     </nav>

@@ -1,8 +1,10 @@
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginActions } from "../../../store/slice/login";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const idToken = useSelector((state) => state.login.idToken);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +46,9 @@ const LoginForm = () => {
     sendData()
       .then((data) => {
         dispatch(loginActions.login(data.idToken));
+        alert("Login Successful");
+        navigate("/", { replace: true });
+        
       })
       .catch((err) => alert(err.message));
   };

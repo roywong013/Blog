@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import Header from "../../Header";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.login.isLogin);
   const nameInputRef = useRef();
   const emailInputRef = useRef();
@@ -33,7 +36,9 @@ const Register = () => {
         setIsLoading(false);
         if (res.ok) {
           // ... success respone
-          console.log("RES OK");
+          //dispatch(loginActions.login(res.json().date.idToken));
+          alert("Sign Up Successful");
+          navigate("/", {replace: true})
           return res.json;
         } else {
           // ...error

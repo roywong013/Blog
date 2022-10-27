@@ -45,10 +45,17 @@ const LoginForm = () => {
     };
     sendData()
       .then((data) => {
-        dispatch(loginActions.login(data.idToken));
+        const expirationTime = new Date(
+          new Date().getTime() + +data.expiresIn * 1000
+        );
+        dispatch(
+          loginActions.login({
+            token: data.idToken,
+            expirationTime: expirationTime.toISOString()
+          })
+        );
         alert("Login Successful");
         navigate("/", { replace: true });
-        
       })
       .catch((err) => alert(err.message));
   };

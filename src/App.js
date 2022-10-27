@@ -6,10 +6,30 @@ import Settings from "./Component/Page/Settings";
 import Login from "./Component/Page/LoginPage/Login";
 import Register from "./Component/Page/RegisterPage/Register";
 import Profile from "./Component/Page/ProfilePage/Profile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { loginActions } from "./store/slice/login";
 
 export default function App() {
   const isLogin = useSelector((state) => state.login.isLogin);
+  const expirationTime = useSelector((state) => state.login.expirationTime);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let logoutTimer;
+
+    if (isLogin) {
+      const logoutTime =
+        new Date(expirationTime).getTime() - new Date().getTime();
+      logoutTimer = setTimeout(() => {
+        dispatch(loginActions.logout());
+      }, logoutTime);
+    }
+    return () => {
+      clearTimeout(logoutTimer);
+    };
+  }, [isLogin, expirationTime, dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
